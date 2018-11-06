@@ -77,6 +77,10 @@ public:
     for (const auto& it : c_map) {
       it.second(this, info, data);
     }
+    for (const auto& it : cfmap) {
+      std::cout << "ttt\n";
+      it.second(this, info, data);
+    }
     return true;
   }
   bool _check1(int info, int data) {
@@ -84,5 +88,8 @@ public:
   }
 const std::map<std::string, decltype(std::mem_fn(&Filter::filter))> c_map = {
 {"first", std::mem_fn(&Filter::_check1)},
+};
+const std::map<std::string, std::function<bool(Filter*, int, int)>> cfmap = {
+{"first", &Filter::_check1},
 };
 };
